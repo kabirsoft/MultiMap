@@ -1,0 +1,99 @@
+------------------------- Description:(what this application(Multimap) do) ---------------------------
+Here are three object. 1. Lokasjon 2. Bygg 3. Etasje
+These three objects, you can create, edit, update and delete.
+------------------------------------ Table -------
+Three Table.
+1. Lokasjons
+2. Byggs
+3. Etasjes
+Lokasjon -> Byggs (one to many)
+Byggs -> Etasjes (one to many)
+
+
+------------------------ Project structure ---------------------------------
+There are two projec in the solutin.
+Solution name : MultiMap
+Project Name :  
+				MultiMap (MVC)	
+					Controller:
+						LokasjonsController
+						ByggsController
+						EtasjesController
+				
+				MultiMap.Data 
+					IRepositories
+						ILokasjonRepo
+						IByggRepo
+						IEtaasjeRepo
+					Repositories
+						LokasjonRepo
+						ByggRepo
+						EtaasjeRepo
+					
+					Models: 
+						Lokasjon
+						Bygg
+						Etasje
+
+
+
+-------------------------- Setup project locally ----------------------------------
+1. Download/git clone from github
+2. You have to migrate database to run this application.
+How to migrate:
+VS->Tool->nuget package manager->package manager console -> select default project: MultiMap.Data
+>add-migration "Create database MultiMapDB"
+>update-database -verbose
+Check MSSql if database has been created.
+
+------------------------- Two types of implementation in this solution(MVC and WebAPI): --------
+1. How to run MVC Project:
+set as startup project : MultiMap 
+ctr + f5 or VS->Debug->start without debugging
+
+
+----------------- Functionality ------------
+1. Login functionality
+2. Save, Read, Delete record , data save in MSSql Database
+
+----------------- 7. Framework and tools ----------
+Backend:
+    .net 5.0
+    Language:C# 8.0
+    EntityFrameworkCore 5.0.3
+	MVC framework	
+	AspNetCore.Identity for login
+	MSSql
+	Migration(EntityFrameworkCore tool to update database schema)	
+	
+Frontend:
+Razor
+Bootstrap(CSS framework)
+
+---------------------- Solution folder structure  --------------------------
+Solution has 2 seperate project
+1. MultiMap.Data: Data has been separate from other project . Both MVC controller get data from this layer.
+2. MultiMap(MVC) : Controller here read/save the data to/from MultiMap.Data and send data to View
+
+-------------- oAuth github -------
+https://www.youtube.com/watch?v=R9lxXQcy-nM&t=246s
+
+1. https://github.com/settings/developers
+   set clientId and clientSecret
+   
+2. install:  AspNet.Security.OAuth.GitHub
+<PackageReference Include="AspNet.Security.OAuth.GitHub" Version="5.0.4" />
+
+3. appsettings.json  
+"Github": {
+    "ClientId": "d69fd2cf2f8a85dadd7f",
+    "ClientSecret": "f2ae564db6443fd01e2b456346642fc4b01b8c53"
+  },
+  
+4. startup.cs
+services.AddAuthentication().AddGitHub(options =>
+              {
+                  options.ClientId = Configuration["Github:ClientId"];
+                  options.ClientSecret = Configuration["Github:ClientSecret"];
+              });
+

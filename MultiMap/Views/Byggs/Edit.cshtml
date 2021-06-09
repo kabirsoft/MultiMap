@@ -1,0 +1,58 @@
+﻿@model MultiMap.Data.Models.Bygg
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Bygg</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Navn" class="control-label"></label>
+                <input asp-for="Navn" class="form-control" />
+                <span asp-validation-for="Navn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Beskrivelse" class="control-label"></label>
+                <textarea asp-for="Beskrivelse" rows="5" cols="40" class="form-control"></textarea>
+                <span asp-validation-for="Beskrivelse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AntallEtasje" class="control-label"></label>
+                <input asp-for="AntallEtasje" class="form-control" />
+                <span asp-validation-for="AntallEtasje" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Byggeår" class="control-label"></label>
+                <input asp-for="Byggeår" class="form-control" />
+                <span asp-validation-for="Byggeår" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="LokasjonId" class="control-label"></label>
+                <select asp-for="LokasjonId" class="form-control" asp-items="ViewBag.LokasjonId">
+                    <option value="">Please select Lokasjon</option>
+                </select>
+                <span asp-validation-for="LokasjonId" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

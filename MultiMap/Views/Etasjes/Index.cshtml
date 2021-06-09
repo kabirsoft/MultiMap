@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MultiMap.Data.Models.Etasje>
+@using MultiMap.Helpers
+
+@{
+    ViewData["Title"] = "Etasje";
+}
+
+<h1>Etasje</h1>
+<p> Her kan du redigere og legge til etasjer </p>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Navn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beskrivelse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bygg)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.Navn) </a>
+                </td>
+                <td>
+                    @Html.Truncate(item.Beskrivelse, 20)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bygg.Navn)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
